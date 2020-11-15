@@ -1,16 +1,20 @@
 import React from "react";
 import Login from "./components/Login";
-import useLocalStorage from './hooks/useLocalStorage'
+import useLocalStorage from "./hooks/useLocalStorage";
 import Dashboard from "./components/Dashboard";
- 
-function App() {
-  const [user, setUser] = useLocalStorage('user');
+import { ContactsProvider } from "./contexts/ContactsProvider";
+import { GamessProvider } from "./contexts/GamesProvider";
 
-  return (
-    <>
-      { user ? <Dashboard user={user} /> :  <Login onUserSubmit={setUser} />}
-    </>
+export default function App() {
+  const [user, setUser] = useLocalStorage("user");
+
+  const dashboard = (
+    <ContactsProvider>
+      <GamessProvider>
+        <Dashboard user={user} />
+      </GamessProvider>
+    </ContactsProvider>
   );
-}
 
-export default App;
+  return <>{user ? dashboard : <Login onUserSubmit={setUser} />}</>;
+}
