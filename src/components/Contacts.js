@@ -8,8 +8,8 @@ export default function Contacts() {
 
   return (
     <List>
-      {contacts.map((contact, index) => (
-        <ListItem key={index}>
+      {contacts.map((contact, i) => (
+        <ListItem key={i}>
           <PersonOutlineIcon style={{ margin: "5px" }} />
           <ListItemText>{contact.name}</ListItemText>
         </ListItem>

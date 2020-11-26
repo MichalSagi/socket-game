@@ -3,14 +3,12 @@ import { useGames } from "../contexts/GamesProvider";
 import { List, ListItem, ListItemText } from "@material-ui/core";
 
 export default function Games() {
-  const { games, gamers } = useGames();
-
-  console.log(games)
+  const { games, selectedGameId } = useGames();
 
   return (
     <List>
         {games.map((game, i) => 
-          (<ListItemText key={i}>{game.map(gamer => gamer.name).join(', ')}</ListItemText>)
+          (<ListItem key={i} button divider={true} selected={game.selected}><ListItemText onClick={() => selectedGameId(i)}>{game.emails.map(email => email.name).join(', ')}</ListItemText> </ListItem>)
         )}
     </List>
   );
